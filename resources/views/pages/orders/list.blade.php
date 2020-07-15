@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="col-lg-12" align="center">
-                    <a href="{{route('get_product_create')}}" class="btn btn-secondary">Inventario</a>
+                    <a href="{{route('get_consult_inventories')}}" class="btn btn-secondary">Inventario</a>
                 </div>
                 <br>
                 <table class="table">

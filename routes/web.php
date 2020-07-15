@@ -20,6 +20,7 @@ Route::get('update_row_cart/{idDetail}/{quantity}', 'CartController@updateCart')
 Route::post('add_order_cart', 'OrderController@orderProduct')->name('post_add_product_cart');
 Route::get('detail_order_product/{id}', 'OrderController@detailOrder')->name('get_detail_order_product');
 Route::get('pdf_invoice_download/{id}', 'OrderController@invoice')->name('get_pdf_invoice_download');
+Route::get('consult_inventories', 'OrderController@inventories')->name('get_consult_inventories');
 
 
 

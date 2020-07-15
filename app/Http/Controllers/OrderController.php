@@ -8,6 +8,7 @@ use App\Order;
 use App\Payment;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -103,5 +104,31 @@ class OrderController extends Controller
         $pdf = \PDF::loadView('pages.orders.pdf', compact('orders','payment'));
         return $pdf->download('ejemplo.pdf');
 
+    }
+
+    public function inventories()
+    {
+
+        $products = Product::select('detail_products.id','detail_products.price','detail_products.quantity', 'products.name as name_product')
+            ->join('detail_products', 'detail_products.product_id', '=', 'products.id')
+            ->get();
+
+
+        return view('pages.orders.inventories', compact('products'));
+    }
+
+    public static function counOrder($id)
+    {
+
+        $payment = Payment::select('products.name as name_product', DB::raw('sum(payment.quantity) as quantityT'),
+            DB::raw('sum(payment.price) as priceSum'))
+            ->join('detail_products', 'detail_products.id', 'payment.detail_product_id')
+            ->join('products', 'products.id', 'detail_products.product_id')
+            ->where('detail_product_id', $id)
+            ->groupby('detail_product_id')
+            ->first();
+
+
+        return $payment;
     }
 }
