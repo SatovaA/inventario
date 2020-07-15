@@ -24,16 +24,27 @@
                     @foreach($carts as $cart)
                         @php
                             $subTotal = $cart->priceNew * $cart->quantityNew;
+
+                            $nameProduct = '';
+                            foreach ($products as $product){
+                                if($product->id == $cart->id){
+                                    $nameProduct = $product->name;
+                                }
+                            }
                         @endphp
-                        <tr>
-                            <td>ddd</td>
+                        <tr id="row_cart_{{ $cart->id }}">
+                            <td>{{$nameProduct}}</td>
                             <td>$ {{number_format($cart->priceNew)}}</td>
                             <td>
                                 <input type="hidden" id="priceValue_{{$cart->id}}" value="{{$cart->priceNew}}">
                                 <input type="number" class="form-control text-center" width="5%" value="{{$cart->quantityNew}}" onchange="updateQuantity(this.value, {{$cart->id}})">
                             </td>
                             <td><span id="textPrice_{{$cart->id}}">$ {{number_format($subTotal, 0, '.', '.')}}</span></td>
-                            <td></td>
+                            <td>
+                                <button type="button" id="delete_{{$cart->id}}" onclick="deleteProduct({{$cart->id}});">
+                                    <i class="far fa-trash-alt" style="color: red"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
 

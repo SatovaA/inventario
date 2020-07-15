@@ -25,10 +25,10 @@ class CartController extends Controller
         //GUARDA VARIABLE DE CARRO DE COMPRAS
         $carts = \Session::get('cart');
 
-        $product = Product::all();
+        $products = Product::all();
         $total = $this->subTotal();
 
-        return view('pages.cart.detail', compact('carts', 'product', 'total'));
+        return view('pages.cart.detail', compact('carts', 'products', 'total'));
     }
 
     /**

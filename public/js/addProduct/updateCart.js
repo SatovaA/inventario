@@ -31,7 +31,7 @@ function updateQuantity(value, id) {
 function deleteProduct(id) {
 
     $.ajax({
-        url: '../delete_row_cart/' + id,
+        url: 'delete_row_cart/' + id,
         type: 'GET',
         dataType: "json",
         success: function (response) {

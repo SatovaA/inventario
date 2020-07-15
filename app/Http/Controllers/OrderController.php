@@ -17,44 +17,48 @@ class OrderController extends Controller
         try {
 
             $cart = \Session::get('cart');
+            if(count($cart)){
+                $client = Client::where('email', $request->email)
+                    ->first();
 
-            $client = Client::where('email', $request->email)
-                ->first();
+                if(!empty($client)){
+                    $client->email = $request->email;
+                    $client->name = $request->name;
+                    $client->update();
+                    $idClient = $client->id;
+                }else{
+                    $newClient = new Client;
+                    $newClient->email = $request->email;
+                    $newClient->name = $request->name;
+                    $newClient->save();
 
-            if(!empty($client)){
-                $client->email = $request->email;
-                $client->name = $request->name;
-                $client->update();
-                $idClient = $client->id;
+                    $idClient = $newClient->id;
+                }
+
+                $order = new Order();
+                $order->client_id = $idClient;
+                $order->status = 1;
+                $order->save();
+
+                foreach ($cart as $carts){
+                    $payment = new Payment();
+                    $payment->quantity = $carts->quantityNew;
+                    $payment->price = $carts->priceNew;
+                    $payment->detail_product_id = $carts->id;
+                    $payment->order_id  = $order->id;
+                    $payment->status = 1;
+                    $payment->save();
+                }
+                \Session::forget('cart');
+
+                alert()->success('Exitoso','El pedido se genero.');
             }else{
-                $newClient = new Client;
-                $newClient->email = $request->email;
-                $newClient->name = $request->name;
-                $newClient->save();
-
-                $idClient = $newClient->id;
+                alert()->info('Notificación','Debe agregar al menos un producto.');
             }
 
-            $order = new Order();
-            $order->client_id = $idClient;
-            $order->status = 1;
-            $order->save();
-
-            foreach ($cart as $carts){
-               $payment = new Payment();
-               $payment->quantity = $carts->quantityCart;
-               $payment->price = $carts->priceNew;
-               $payment->detail_product_id = $carts->id;
-               $payment->order_id  = $order->id;
-               $payment->status = 1;
-               $payment->save();
-            }
-
-            alert()->success('Exitoso','El pedido se genero.');
             return redirect()->route('get_index');
 
         }catch(\Exception $e){
-
             alert()->error('Error','Ocurrio un error al guardar la información.');
             return redirect()->route('get_index');
         }

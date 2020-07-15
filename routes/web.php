@@ -17,6 +17,10 @@ Route::get('/', 'ClientController@index')->name('get_index');
 Route::get('add_product/{idProduct}', 'CartController@cart')->name('get_add_cart');
 Route::get('view_cart', 'CartController@show')->name('get_view_cart');
 Route::get('update_row_cart/{idDetail}/{quantity}', 'CartController@updateCart')->name('get_update_row_cart');
+Route::get('delete_row_cart/{idDetail}', 'CartController@deleteRowCart')->name('get_delete_row_cart');
+
+
+
 Route::post('add_order_cart', 'OrderController@orderProduct')->name('post_add_product_cart');
 Route::get('detail_order_product/{id}', 'OrderController@detailOrder')->name('get_detail_order_product');
 Route::get('pdf_invoice_download/{id}', 'OrderController@invoice')->name('get_pdf_invoice_download');
