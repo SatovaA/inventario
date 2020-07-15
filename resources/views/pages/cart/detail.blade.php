@@ -50,24 +50,27 @@
                     </tr>
                     </tfoot>
                 </table>
-            <form action="{{route('post_add_product_cart')}}" method="POST">
+            <form action="{{route('post_add_product_cart')}}" method="POST" id="formCart">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Correo</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nombres</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Password">
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <table>
                     <tr>
-                        <td><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Comprando</a></td>
+                        <td><a href="{{route('get_index')}}" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Comprando</a></td>
                         <td colspan="2"></td>
 
 
-                        <td><button type="submit" class="btn btn-success btn-block">Comprar <i class="glyphicon glyphicon-menu-right"></i></button></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-block" id="saveCart">Comprar
+                                <i class="glyphicon glyphicon-menu-right"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tfoot>
                 </table>
@@ -81,6 +84,7 @@
 
 @section('script')
     <script src="{{asset('js/addProduct/updateCart.js')}}"></script>
+    <script src="{{asset('js/addProduct/cartValidation.js')}}"></script>
     <script src="{{asset('js/addProduct/formatNumber.js')}}"></script>
 @endsection
 
