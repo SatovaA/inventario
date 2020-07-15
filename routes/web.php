@@ -17,7 +17,7 @@ Route::get('/', 'ClientController@index')->name('get_index');
 Route::get('add_product/{idProduct}', 'CartController@cart')->name('get_add_cart');
 Route::get('view_cart', 'CartController@show')->name('get_view_cart');
 Route::get('update_row_cart/{idDetail}/{quantity}', 'CartController@updateCart')->name('get_update_row_cart');
-Route::post('add_order_cart', 'CartController@updateCart')->name('post_add_product_cart');
+Route::post('add_order_cart', 'OrderController@orderProduct')->name('post_add_product_cart');
 
 
 

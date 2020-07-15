@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nombres</label>
-                    <input type="password" class="form-control" id="name" name="name" placeholder="Password">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Password">
                 </div>
                 <table>
                     <tr>
@@ -67,7 +67,7 @@
                         <td colspan="2"></td>
 
 
-                        <td><a href="Pagos.php" class="btn btn-success btn-block">Comprar <i class="glyphicon glyphicon-menu-right"></i></a></td>
+                        <td><button type="submit" class="btn btn-success btn-block">Comprar <i class="glyphicon glyphicon-menu-right"></i></button></td>
                     </tr>
                     </tfoot>
                 </table>
