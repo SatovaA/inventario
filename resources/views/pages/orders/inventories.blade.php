@@ -33,8 +33,6 @@
                     @foreach($products as $product)
                         @php
                             $payment = \App\Http\Controllers\OrderController::counOrder($product->id);
-
-                        var_dump($payment);
                         @endphp
                         <tr>
                             <td>{{$product->name_product}}</td>
