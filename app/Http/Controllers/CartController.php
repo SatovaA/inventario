@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DetailProduct;
+use App\Payment;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -61,18 +62,31 @@ class CartController extends Controller
         $quantityNew = $data['quantityNew'];
         $priceNew = $data['priceNew'];
 
+        $order = Payment::where('detail_product_id', $idProduct)
+            ->where('status', 1)
+            ->get()
+            ->sum('quantity');
+
         $detailProduct = DetailProduct::find($idProduct);
 
-        $cart = \Session::get('cart');
+        $value = $detailProduct->quantity - $order;
 
-        $detailProduct->quantityNew = $quantityNew;
-        $detailProduct->priceNew = $priceNew;
+        if($quantityNew <= $value ){
+            $cart = \Session::get('cart');
 
-        if ( !array_key_exists($detailProduct->id, $cart)){
-            $cart[$detailProduct->id] = $detailProduct;
+            $detailProduct->quantityNew = $quantityNew;
+            $detailProduct->priceNew = $priceNew;
+
+            if ( !array_key_exists($detailProduct->id, $cart)){
+                $cart[$detailProduct->id] = $detailProduct;
+            }
+            \Session::put('cart', $cart);
+            alert()->success('Generado','Se ha almacenado un producto.');
+        }else{
+
+            alert()->info('Notificación','En el inventario solo se encuentran '.$value.' productos disponibles');
         }
-        \Session::put('cart', $cart);
-        alert()->success('Generado','Se ha almacenado un producto.');
+
         return redirect()->route('get_index');
     }
 
