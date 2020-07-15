@@ -24,10 +24,6 @@ class ProductController extends Controller
 
             $product = new Product;
             $product->name = $request->name;
-            $product->quantity = $request->quantity;
-            $product->lot_number = $request->lot_number;
-            $product->expiration_date = $request->expiration_date;
-            $product->price = $request->price;
             $product->save();
 
             alert()->success('Exitoso','El producto se agrego.');
@@ -35,7 +31,7 @@ class ProductController extends Controller
 
         }catch(\Exception $e){
 
-            alert()->danger('Error','Ocurrio un error al guardar la información.');
+            alert()->error('Error','Ocurrio un error al guardar la información.');
             return redirect()->route('get_product_list');
         }
     }
@@ -53,18 +49,13 @@ class ProductController extends Controller
 
             $product = Product::find($request->idProduct);
             $product->name = $request->name;
-            $product->quantity = $request->quantity;
-            $product->lot_number = $request->lot_number;
-            $product->expiration_date = $request->expiration_date;
-            $product->price = $request->price;
             $product->update();
 
             alert()->success('Exitoso','El producto se actualizo correctamente.');
             return redirect()->route('get_product_edit', $request->idProduct);
 
         }catch(\Exception $e){
-
-            alert()->danger('Error','Ocurrio un error al guardar la información.');
+            alert()->error('Error','Ocurrio un error al guardar la información.');
             return redirect()->route('get_product_edit', $request->idProduct);
         }
     }

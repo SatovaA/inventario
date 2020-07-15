@@ -20,26 +20,22 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">N° lote</th>
                         <th scope="col">Nombre producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Fecha vencimiento</th>
+                        <th scope="col">Fecha creación</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($products as $product)
                         <tr>
-                            <th scope="row">{{$product->lot_number}}</th>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->quantity}}</td>
-                            <td>$ {{number_format($product->price, 0, '.', '.')}}</td>
-                            <td>{{$product->expiration_date}}</td>
+                            <td>{{$product->created_at}}</td>
                             <td>
                                 <a href="{{route('get_product_edit', $product->id)}}" class="mr-2">
                                     <i class="fas fa-edit text-info font-16"></i>
                                 </a>
+                                <a href="{{route('get_product_edit', $product->id)}}" class="btn btn-primary btn-sm">Editar producto</a>
+                                <a href="{{route('get_product_entries', $product->id)}}" class="btn btn-secondary btn-sm">Enntradas productos</a>
                             </td>
 
                         </tr>
@@ -48,7 +44,6 @@
                 </table>
             </div>
         </div>
-
     </div>
     <!-- Fin Page Content -->
 

@@ -16,34 +16,9 @@
                 <form action="{{route('post_product_store')}}" method="post" id="formProduct">
                     @csrf
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Nombre producto</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" id="name" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Cantidad</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="quantity" id="quantity" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Precio</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="price" id="price" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Número de lote</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lot_number" name="lot_number">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Fecha vencimiento</label>
-                        <div class="col-sm-10">
-                            <input type="date" class="form-control" id="expiration_date" name="expiration_date"
-                                   required>
                         </div>
                     </div>
                     <input type="submit" value="Enviar" id="saveProduct">
